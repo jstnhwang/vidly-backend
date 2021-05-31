@@ -38,11 +38,9 @@ router.post("/", async (req, res) => {
     });
     rental = await rental.save();
 
-    movie = await Movie.findByIdAndUpdate(req.body.movieId, {
+    await Movie.findByIdAndUpdate(req.body.movieId, {
       $inc: { numberInStock: -1 }
     }).session(session);
-
-    await movie.save();
 
     res.send(rental);
   });
