@@ -9,6 +9,8 @@ const auth = require("./routes/auth");
 const express = require("express");
 const app = express();
 
+const { MONGODB_URI } = process.env;
+
 if (!config.get("jwtPrivateKey")) {
   console.error("FATAL ERR: jwtPrivateKey is not defined.");
   process.exit(1);
@@ -16,7 +18,7 @@ if (!config.get("jwtPrivateKey")) {
 
 try {
   mongoose.connect(
-    "mongodb+srv://jstnhwang:QAYaYFtwg2UQVIdJ@cluster0.rvnwj.mongodb.net/vidly?retryWrites=true&w=majority",
+    MONGODB_URI,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
